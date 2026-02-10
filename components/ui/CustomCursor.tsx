@@ -1,38 +1,47 @@
-// UltraCursor.tsx
 "use client";
 
 import { useEffect, useState } from "react";
 
 export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
-  const [isPointer, setIsPointer] = useState(false);
+  const [click, setClick] = useState(false);
 
   useEffect(() => {
-    const updatePosition = (e: MouseEvent) => {
+    const move = (e: MouseEvent) => {
       setPosition({ x: e.clientX, y: e.clientY });
-      const target = e.target as HTMLElement;
-      setIsPointer(
-        target.tagName === "A" || target.tagName === "BUTTON"
-      );
     };
 
-    window.addEventListener("mousemove", updatePosition);
-    return () => window.removeEventListener("mousemove", updatePosition);
+    const clickEffect = () => {
+      setClick(true);
+      setTimeout(() => setClick(false), 450);
+    };
+
+    window.addEventListener("mousemove", move);
+    window.addEventListener("mousedown", clickEffect);
+
+    return () => {
+      window.removeEventListener("mousemove", move);
+      window.removeEventListener("mousedown", clickEffect);
+    };
   }, []);
 
   return (
     <>
-      {/* Hexágono rotatorio */}
+      {/* Cursor principal */}
       <div
-        className="fixed pointer-events-none z-[9999] transition-transform duration-200"
+        className="fixed pointer-events-none z-[9999]"
         style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: `translate(-50%, -50%) scale(${isPointer ? 1.5 : 1})`,
+          left: position.x,
+          top: position.y,
+          transform: "translate(-50%, -50%)",
         }}
       >
-        {/* Hexágono exterior */}
-        <svg width="40" height="40" viewBox="0 0 40 40" className="animate-spin-slow">
+        <svg
+          width="36"
+          height="36"
+          viewBox="0 0 40 40"
+          className="animate-spin-slow"
+        >
           <polygon
             points="20,2 35,11 35,29 20,38 5,29 5,11"
             fill="none"
@@ -48,23 +57,23 @@ export default function CustomCursor() {
             opacity="0.5"
           />
         </svg>
-        
+
         {/* Punto central */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_10px_#fff]" />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="w-1.5 h-1.5 bg-white rounded-full shadow-[0_0_10px_#fff]" />
+        </div>
       </div>
 
-      {/* Anillo exterior con delay */}
-      <div
-        className="fixed pointer-events-none z-[9998] transition-all duration-500 ease-out"
-        style={{
-          left: `${position.x}px`,
-          top: `${position.y}px`,
-          transform: "translate(-50%, -50%)",
-        }}
-      >
-        <div className="w-16 h-16 border border-cyan-400/20 rounded-full animate-ping" 
-             style={{ animationDuration: "2s" }} />
-      </div>
+      {/* 💥 Efecto click */}
+      {click && (
+        <div
+          className="click-ring"
+          style={{
+            left: position.x,
+            top: position.y,
+          }}
+        />
+      )}
     </>
   );
 }
