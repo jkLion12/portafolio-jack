@@ -42,7 +42,7 @@ export default function ParticlesBackground() {
             grab: {
               distance: 140,
               links: {
-                // opacity: 1, // Más visible
+                opacity: 1, // Más visible
                 color: "#00ffff", // Cyan más brillante
               },
             },
@@ -50,7 +50,7 @@ export default function ParticlesBackground() {
               distance: 200,
               size: 10, // Más grande
               duration: 2,
-              // opacity: 1, // Opacidad máxima
+              opacity: 1, // Opacidad máxima
             },
           },
         },
@@ -62,7 +62,7 @@ export default function ParticlesBackground() {
             color: "#00ddff",
             distance: 150,
             enable: true,
-            // opacity: 0.6, // Más visible (antes 0.3)
+            opacity: 0.6, // Más visible (antes 0.3)
             width: 1.5, // Más grueso
           },
           move: {
@@ -82,15 +82,15 @@ export default function ParticlesBackground() {
             },
             value: 80,
           },
-          // opacity: {
-          //   value: 0.8, // MÁS VISIBLE (antes 0.5)
-          //   random: true,
-          //   animation: {
-          //     enable: true,
-          //     speed: 1,
-          //     minimumValue: 0.4, // Mínimo más alto (antes 0.1)
-          //   },
-          // },
+          opacity: {
+            value: 0.8, // MÁS VISIBLE (antes 0.5)
+            random: true,
+            animation: {
+              enable: true,
+              speed: 1,
+              minimumValue: 0.4, // Mínimo más alto (antes 0.1)
+            },
+          },
           shape: {
             type: ["circle", "triangle"],
           },
