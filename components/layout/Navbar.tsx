@@ -145,7 +145,7 @@ export default function Navbar() {
                     </a>
 
                     <a
-                      href="https://linkedin.com/in/TU_USUARIO"
+                      href="https://www.linkedin.com/in/jack-lion-ha"
                       target="_blank"
                       className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/5 transition group"
                     >
@@ -216,7 +216,7 @@ export default function Navbar() {
               </a>
 
               <a
-                href="https://linkedin.com/in/TU_USUARIO"
+                href="https://www.linkedin.com/in/jack-lion-ha/"
                 target="_blank"
                 className="text-cyan-400 hover:scale-110 transition"
               >
