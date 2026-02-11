@@ -153,7 +153,7 @@ export default function Hero() {
   {/* Contenedor imagen */}
   <div className="relative z-10">
     <Image
-      src="/img/hero.png"
+      src="./img/hero.png"
       alt="Player Avatar"
       width={420}
       height={420}

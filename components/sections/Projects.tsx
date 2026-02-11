@@ -10,7 +10,7 @@ const projects = [
   {
     title: "Sistema Web Quipu",
     desc: "Aplicación web moderna con React, Next.js y autenticación por token.",
-    image: "/img/projects/quipu.png",
+    image: "./img/projects/quipu.png",
     tech: ["Next.js", "React", "Tailwind", "JWT"],
     demo: "#",
     code: "#",
@@ -19,7 +19,7 @@ const projects = [
   {
     title: "App Móvil Fitness",
     desc: "Aplicación híbrida desarrollada con Ionic y enfoque UX/UI.",
-    image: "/img/projects/quipu.png",
+    image: "./img/projects/quipu.png",
     tech: ["IONIC", "Angular", "Firebase"],
     demo: "#",
     code: "#",
@@ -28,7 +28,7 @@ const projects = [
   {
     title: "Videojuego Educativo",
     desc: "Videojuego educativo con gamificación y aprendizaje interactivo.",
-    image: "/img/projects/quipu.png",
+    image: "./img/projects/quipu.png",
     tech: ["Unity", "C#", "Blender"],
     demo: "#",
     code: "#",
@@ -37,7 +37,7 @@ const projects = [
   {
     title: "Dashboard Analytics",
     desc: "Panel de control en tiempo real con Next.js y Chart.js",
-    image: "/img/projects/quipu.png",
+    image: "./img/projects/quipu.png",
     tech: ["Next.js", "Node.js", "PostgreSQL"],
     demo: "#",
     code: "#",
@@ -46,7 +46,7 @@ const projects = [
   {
     title: "Kinder Cloud",
     desc: "Panel de control en tiempo real con Next.js y Chart.js",
-    image: "/img/projects/quipu.png",
+    image: "./img/projects/quipu.png",
     tech: ["Next.js", "Node.js", "PostgreSQL"],
     demo: "#",
     code: "#",
