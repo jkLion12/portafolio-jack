@@ -27,7 +27,7 @@ export default function Hero() {
       setText(
         isDeleting
           ? fullText.substring(0, text.length - 1)
-          : fullText.substring(0, text.length + 1)
+          : fullText.substring(0, text.length + 1),
       );
 
       setTypingSpeed(isDeleting ? 50 : 150);
@@ -47,11 +47,10 @@ export default function Hero() {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 overflow-hidden">
       <ParticlesBackground />
-      
+
       <div className="absolute inset-0  from-black via-zinc-900/80 to-black z-0" />
-      
+
       <div className="relative z-10 max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
-        
         {/* TEXTO */}
         <motion.div
           initial={{ opacity: 0, x: -80 }}
@@ -80,8 +79,8 @@ export default function Hero() {
             transition={{ delay: 0.4 }}
             className="mt-6 text-lg text-zinc-300"
           >
-            Desarrollador Web enfocado en experiencias modernas,
-            animadas y bien <span className="text-cyan-400 font-semibold">bravas</span> 🚀
+            Desarrollador Web enfocado en experiencias modernas, animadas y bien{" "}
+            <span className="text-cyan-400 font-semibold">bravas</span> 🚀
           </motion.p>
 
           <motion.div
@@ -91,7 +90,10 @@ export default function Hero() {
             className="mt-8 flex gap-4 flex-wrap"
           >
             <motion.a
-              whileHover={{ scale: 1.08, boxShadow: "0 0 25px rgba(34, 211, 238, 0.5)" }}
+              whileHover={{
+                scale: 1.08,
+                boxShadow: "0 0 25px rgba(34, 211, 238, 0.5)",
+              }}
               whileTap={{ scale: 0.95 }}
               href="#projects"
               className="group relative px-6 py-3 bg-cyan-500 text-black font-semibold rounded-xl overflow-hidden transition-all"
@@ -142,22 +144,48 @@ export default function Hero() {
           >
             {/* Borde animado */}
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-2xl opacity-75 group-hover:opacity-100 blur transition-all duration-300 animate-pulse" />
-            
+
             <div className="relative">
-              <Image
-                src="/img/hero.png"
-                alt="Developer illustration"
-                width={420}
-                height={420}
-                className="rounded-2xl relative z-10"
-              />
-              
+              <div className="absolute -top-8 right-6 font-mono text-xs tracking-widest text-cyan-400 opacity-80">
+                SELECTED
+              </div>
+
+  {/* Contenedor imagen */}
+  <div className="relative z-10">
+    <Image
+      src="/img/hero.png"
+      alt="Player Avatar"
+      width={420}
+      height={420}
+      className="rounded-2xl"
+    />
+  </div>
+    {/* Mini HUD stats */}
+  <div className="absolute z-20 -bottom-6 left-1/2 -translate-x-1/2
+    flex gap-4 bg-black/80 backdrop-blur-md
+    border border-cyan-400/30 rounded-xl
+    px-4 py-2 text-xs font-mono text-white
+    shadow-[0_0_20px_rgba(34,211,238,0.35)]
+  ">
+    <span>⚡ FRONTEND 90</span>
+    <span>🧠 BACKEND 75</span>
+    <span>🎨 UI/UX 85</span>
+  </div>
+
+
+              {/* HUD PLAYER INFO */}
+              <div className="absolute top-4 left-4 z-30 bg-black/60 backdrop-blur-md border border-cyan-400/30 rounded-lg px-3 py-2 font-mono text-xs text-cyan-400">
+                <p>PLAYER 01</p>
+                <p>LEVEL 99</p>
+                <p className="text-green-400">STATUS: READY</p>
+              </div>
+
               {/* Grid overlay */}
               <div className="absolute inset-0 rounded-2xl bg-[linear-gradient(rgba(0,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none z-20" />
             </div>
+            
           </motion.div>
         </motion.div>
-
       </div>
     </section>
   );

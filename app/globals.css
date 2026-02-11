@@ -79,3 +79,6 @@ body {
     opacity: 0;
   }
 }
+.perspective-1000 {
+  perspective: 1000px;
+}

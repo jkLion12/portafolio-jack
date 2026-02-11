@@ -16,37 +16,45 @@ export default function Navbar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  // 🔒 bloquear scroll cuando menú mobile está abierto
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
-      {/* CONTENEDOR NAV */}
+      {/* CONTENEDOR */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         className="
           relative flex items-center justify-between
           px-6 py-4 rounded-2xl
-          bg-black/40 backdrop-blur-xl
-          border border-white/10
-          shadow-[0_0_40px_-10px_rgba(34,211,238,0.3)]
+          bg-black/50 backdrop-blur-xl
+          border border-cyan-400/20
+          shadow-[0_0_60px_-15px_rgba(34,211,238,0.5)]
+          overflow-hidden
         "
       >
-        {/* GLOW */}
-        <div className="absolute inset-0 rounded-2xl bg-cyan-400/10 blur-2xl -z-10" />
+        {/* HUD scan line */}
+        <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" />
 
         {/* LOGO */}
         <Link href="/" className="relative group">
-          <span className="text-lg font-bold tracking-widest text-white">
+          <span className="text-lg font-black tracking-widest text-white">
             JACK<span className="text-cyan-400">.DEV</span>
           </span>
-          <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-cyan-400 transition-all group-hover:w-full" />
+
+          {/* glitch underline */}
+          <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-cyan-400 group-hover:w-full transition-all duration-300" />
+
+          {/* online status */}
+          <span className="absolute -right-3 top-1/2 -translate-y-1/2 flex h-2 w-2">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+          </span>
         </Link>
 
-        {/* DESKTOP LINKS */}
+        {/* DESKTOP */}
         <ul className="hidden md:flex items-center gap-2">
           {links.map((link) => {
             const isActive = pathname === link.href;
@@ -55,13 +63,13 @@ export default function Navbar() {
               <li key={link.name} className="relative">
                 {isActive && (
                   <motion.div
-                    layoutId="active-pill"
+                    layoutId="nav-active"
                     className="
                       absolute inset-0 rounded-xl
-                      bg-cyan-400/20 border border-cyan-400/40
-                      shadow-[0_0_20px_rgba(34,211,238,0.6)]
+                      bg-cyan-400/20 border border-cyan-400/50
+                      shadow-[0_0_25px_rgba(34,211,238,0.8)]
                     "
-                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                    transition={{ type: "spring", stiffness: 280, damping: 22 }}
                   />
                 )}
 
@@ -80,29 +88,29 @@ export default function Navbar() {
           })}
         </ul>
 
-        {/* BOTÓN MOBILE */}
+        {/* MOBILE BTN */}
         <button
           onClick={() => setOpen(!open)}
-          className="md:hidden text-white text-xl"
+          className="md:hidden text-white text-2xl"
         >
           {open ? "✕" : "☰"}
         </button>
       </motion.div>
 
-      {/* ===== MOBILE MENU (DISEÑO CORREGIDO) ===== */}
+      {/* ===== MOBILE HUD MENU ===== */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
+            initial={{ opacity: 0, y: -15, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -15, scale: 0.95 }}
             transition={{ duration: 0.25 }}
             className="
               absolute top-full left-0 right-0 mt-3
               rounded-2xl
-              bg-black/90 backdrop-blur-xl
-              border border-white/10
-              shadow-[0_20px_40px_-10px_rgba(0,0,0,0.8)]
+              bg-black/95 backdrop-blur-xl
+              border border-cyan-400/20
+              shadow-[0_30px_60px_-15px_rgba(34,211,238,0.4)]
               overflow-hidden
               md:hidden
             "
@@ -110,13 +118,14 @@ export default function Navbar() {
             <ul className="flex flex-col divide-y divide-white/10">
               {links.map((link) => {
                 const isActive = pathname === link.href;
+
                 return (
                   <li key={link.name}>
                     <Link
                       href={link.href}
                       onClick={() => setOpen(false)}
                       className={`
-                        block px-6 py-4 text-lg font-medium
+                        block px-6 py-5 text-lg font-semibold
                         transition
                         ${
                           isActive
@@ -125,12 +134,18 @@ export default function Navbar() {
                         }
                       `}
                     >
-                      {link.name}
+                      ▶ {link.name}
                     </Link>
                   </li>
                 );
               })}
             </ul>
+
+            {/* HUD footer */}
+            <div className="px-6 py-3 text-xs font-mono text-cyan-400/60 flex justify-between">
+              <span>STATUS: ONLINE</span>
+              <span>FPS: 144</span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
