@@ -1,28 +1,57 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const links = [
-  { name: "Inicio", href: "/" },
-  { name: "Sobre mí", href: "/about" },
-  { name: "Proyectos", href: "/projects" },
-  { name: "Contacto", href: "/contact" },
+  { name: "Inicio", href: "inicio" },
+  { name: "Sobre mí", href: "about" },
+  { name: "Habilidades", href: "skills" },
+  { name: "Proyectos", href: "projects" },
+  { name: "Contacto", href: "contact" },
 ];
 
 export default function Navbar() {
-  const pathname = usePathname();
   const [open, setOpen] = useState(false);
+  const [active, setActive] = useState("inicio");
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "auto";
   }, [open]);
 
+  // Detectar sección visible al hacer scroll
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      links.forEach((link) => {
+        const section = document.getElementById(link.href);
+        if (!section) return;
+
+        const rect = section.getBoundingClientRect();
+
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActive(link.href);
+        }
+      });
+    };
+
+    window.addEventListener("scroll", handleScrollSpy);
+    return () => window.removeEventListener("scroll", handleScrollSpy);
+  }, []);
+
+  const handleScroll = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+    setActive(id);
+    setOpen(false);
+  };
+
   return (
     <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[95%] max-w-6xl">
-      {/* CONTENEDOR */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -35,29 +64,22 @@ export default function Navbar() {
           overflow-hidden
         "
       >
-        {/* HUD scan line */}
         <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-400 to-transparent animate-pulse" />
 
         {/* LOGO */}
-        <Link href="/" className="relative group">
+        <button
+          onClick={() => handleScroll("inicio")}
+          className="relative group"
+        >
           <span className="text-lg font-black tracking-widest text-white">
             JACK<span className="text-cyan-400">.DEV</span>
           </span>
-
-          {/* glitch underline */}
-          <span className="absolute -bottom-1 left-0 h-[2px] w-0 bg-cyan-400 group-hover:w-full transition-all duration-300" />
-
-          {/* online status */}
-          <span className="absolute -right-3 top-1/2 -translate-y-1/2 flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-          </span>
-        </Link>
+        </button>
 
         {/* DESKTOP */}
         <ul className="hidden md:flex items-center gap-2">
           {links.map((link) => {
-            const isActive = pathname === link.href;
+            const isActive = active === link.href;
 
             return (
               <li key={link.name} className="relative">
@@ -69,12 +91,12 @@ export default function Navbar() {
                       bg-cyan-400/20 border border-cyan-400/50
                       shadow-[0_0_25px_rgba(34,211,238,0.8)]
                     "
-                    transition={{ type: "spring", stiffness: 280, damping: 22 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
                   />
                 )}
 
-                <Link
-                  href={link.href}
+                <button
+                  onClick={() => handleScroll(link.href)}
                   className="
                     relative z-10 px-4 py-2 text-sm
                     text-white/70 hover:text-white
@@ -82,7 +104,7 @@ export default function Navbar() {
                   "
                 >
                   {link.name}
-                </Link>
+                </button>
               </li>
             );
           })}
@@ -97,13 +119,13 @@ export default function Navbar() {
         </button>
       </motion.div>
 
-      {/* ===== MOBILE HUD MENU ===== */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, y: -15, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -15, scale: 0.95 }}
+            initial={{ opacity: 0, y: -15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
             transition={{ duration: 0.25 }}
             className="
               absolute top-full left-0 right-0 mt-3
@@ -117,31 +139,36 @@ export default function Navbar() {
           >
             <ul className="flex flex-col divide-y divide-white/10">
               {links.map((link) => {
-                const isActive = pathname === link.href;
+                const isActive = active === link.href;
 
                 return (
-                  <li key={link.name}>
-                    <Link
-                      href={link.href}
-                      onClick={() => setOpen(false)}
+                  <li key={link.name} className="relative">
+                    {isActive && (
+                      <motion.div
+                        layoutId="nav-active-mobile"
+                        className="absolute inset-0 bg-cyan-400/10"
+                      />
+                    )}
+
+                    <button
+                      onClick={() => handleScroll(link.href)}
                       className={`
-                        block px-6 py-5 text-lg font-semibold
+                        relative z-10 w-full text-left px-6 py-5 text-lg font-semibold
                         transition
                         ${
                           isActive
-                            ? "text-cyan-400 bg-cyan-400/10"
+                            ? "text-cyan-400"
                             : "text-white/80 hover:text-white hover:bg-white/5"
                         }
                       `}
                     >
                       ▶ {link.name}
-                    </Link>
+                    </button>
                   </li>
                 );
               })}
             </ul>
 
-            {/* HUD footer */}
             <div className="px-6 py-3 text-xs font-mono text-cyan-400/60 flex justify-between">
               <span>STATUS: ONLINE</span>
               <span>FPS: 144</span>

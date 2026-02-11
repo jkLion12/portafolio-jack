@@ -98,7 +98,7 @@ export default function Hero() {
               href="#projects"
               className="group relative px-6 py-3 bg-cyan-500 text-black font-semibold rounded-xl overflow-hidden transition-all"
             >
-              <span className="relative z-10">Ver proyectos</span>
+              <span className="relative z-10">Descargar CV</span>
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
             </motion.a>
 

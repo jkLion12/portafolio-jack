@@ -7,11 +7,25 @@ import Contact from "@/components/sections/Contact"
 export default function Home() {
   return (
     <main className="overflow-hidden">
-      <Hero />
-      <About />
-      <Skills />
-      <Projects />
-      <Contact />
+      <section id="inicio">
+        <Hero />
+      </section>
+
+      <section id="about">
+        <About />
+      </section>
+
+      <section id="skills">
+        <Skills />
+      </section>
+
+      <section id="projects">
+        <Projects />
+      </section>
+
+      <section id="contact">
+        <Contact />
+      </section>
     </main>
-  )
+  );
 }
