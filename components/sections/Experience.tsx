@@ -7,51 +7,51 @@ import { Code, Server, Cpu, Zap, Trophy, Calendar, MapPin } from "lucide-react";
 const experiences = [
   {
     id: 1,
-    role: "Senior Full Stack Developer",
-    company: "TechCorp Labs",
-    location: "Remote",
-    period: "2023 - Present",
-    description: "Liderando el desarrollo de aplicaciones web escalables con arquitectura serverless. Implementación de microservicios y optimización de rendimiento.",
+    role: "Sistema Web Quipu Digital",
+    company: "Plataforma web full stack",
+    location: "Abancay, PE",
+    period: "2026",
+    description: "Aplicacion web moderna desarrollada con Angular, Nest.js y Node.js, para gestion financiera, control de pagos de agua por distrito y centro poblando.",
     achievements: [
-      "Reducción del 40% en tiempo de carga",
-      "Migración exitosa a arquitectura cloud",
-      "Mentoring de 5 developers junior"
+      // "Implementacion de autenticacion JWT",
+      "Arquitectura frontend y backend separada",
+      "Interfaz pensada para una gestion clara y escalable"
     ],
-    stack: ["React", "Next.js", "TypeScript", "AWS", "Node.js"],
+    stack: ["Angular", "Nest.js", "Node.js", "JWT", "TypeScript"],
     level: "LEGENDARY",
-    xp: 9500
+    xp: 9200
   },
   {
     id: 2,
-    role: "Frontend Developer",
-    company: "Digital Studio X",
-    location: "Lima, PE",
-    period: "2021 - 2023",
-    description: "Desarrollo de interfaces modernas y responsivas. Creación de design systems y componentes reutilizables para múltiples productos.",
+    role: "Sistema Web BlaBla Club",
+    company: "Gestion para guarderia infantil",
+    location: "Abancay, PE",
+    period: "2025",
+    description: "Sistema web orientado a la administracion diaria de una guarderia infantil, con enfoque en control operativo, organizacion de informacion y experiencia de usuario.",
     achievements: [
-      "Design system adoptado por 3 equipos",
-      "98% de satisfacción en UX testing",
-      "Implementación de PWA"
+      "Panel para centralizar la gestion diaria",
+      "Flujos pensados para uso administrativo",
+      "Prototipo visual completo para presentar la solucion"
     ],
-    stack: ["React", "Tailwind", "Framer Motion", "Figma"],
+    stack: ["Angular", "Node.js", "Nest.js", "UX/UI"],
     level: "EPIC",
-    xp: 7200
+    xp: 7800
   },
   {
     id: 3,
-    role: "Junior Developer",
-    company: "StartupHub",
-    location: "Lima, PE",
-    period: "2020 - 2021",
-    description: "Primeros pasos en desarrollo profesional. Colaboración en proyectos web y mobile, aprendizaje de metodologías ágiles.",
+    role: "Apps Moviles Ascendia, FinMentor IA y Clorota",
+    company: "Prototipos mobile y soluciones UX/UI",
+    location: "Abancay, PE",
+    period: "2026",
+    description: "Desarrollo de prototipos moviles para mejorar habitos, gestionar finanzas personales con enfoque inteligente y monitorear la desinfeccion del agua potable.",
     achievements: [
-      "Entrega de 10+ proyectos exitosos",
-      "Certificación en React avanzado",
-      "Contribución a código open source"
+      "Ascendia: prototipo para seguimiento y mejora de habitos",
+      "FinMentor IA: propuesta para ahorro inteligente y finanzas personales",
+      "Clorota: app para control, calculo y monitoreo de desinfeccion de agua"
     ],
-    stack: ["JavaScript", "HTML", "CSS", "Git"],
+    stack: ["React Native", "TypeScript", "Firebase", "Ionic", "Angular"],
     level: "RARE",
-    xp: 3800
+    xp: 6900
   }
 ];
 

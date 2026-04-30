@@ -1,19 +1,34 @@
 "use client"
 
-import Link from "next/link"
 import { motion } from "framer-motion"
 import { Github, Linkedin, Gamepad2, Zap, Cpu, Rocket } from "lucide-react"
 
+const footerLinks = [
+  { label: "Inicio", id: "inicio" },
+  { label: "Sobre mi", id: "about" },
+  { label: "Experiencia", id: "experience" },
+  { label: "Habilidades", id: "skills" },
+  { label: "Proyectos", id: "projects" },
+  { label: "Contacto", id: "contact" },
+]
+
 export default function Footer() {
+  const handleScroll = (id: string) => {
+    const element = document.getElementById(id)
+
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      })
+    }
+  }
+
   return (
     <footer className="relative bg-black/70 border-t border-cyan-400/20 mt-32 overflow-hidden">
-
-      {/* GLOW BACKGROUND */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.15),transparent_70%)]" />
 
       <div className="relative max-w-7xl mx-auto px-6 py-14 grid gap-12 md:grid-cols-3">
-
-        {/* BRAND / PLAYER CARD */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -25,19 +40,18 @@ export default function Footer() {
           </h2>
 
           <p className="text-sm text-white/70 mt-3 max-w-xs leading-relaxed">
-            Desarrollador en formación ⚙️ <br />
-            Gamer de corazón 🎮 <br />
-            Creando experiencias web con estética <span className="text-cyan-400">cyberpunk</span>.
+            Desarrollador en formacion <br />
+            Gamer de corazon <br />
+            Creando experiencias web con estetica{" "}
+            <span className="text-cyan-400">cyberpunk</span>.
           </p>
 
-          {/* STATUS */}
           <div className="mt-4 inline-flex items-center gap-2 text-xs text-green-400">
             <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
             STATUS: ONLINE
           </div>
         </motion.div>
 
-        {/* NAV / HUB */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,32 +60,27 @@ export default function Footer() {
         >
           <h3 className="text-sm font-semibold text-white mb-5 flex items-center gap-2">
             <Gamepad2 size={16} className="text-cyan-400" />
-            HUB DE NAVEGACIÓN
+            HUB DE NAVEGACION
           </h3>
 
           <ul className="space-y-3 text-sm text-white/70">
-            {[
-              ["Inicio", "/"],
-              ["Sobre mí", "/about"],
-              ["Proyectos", "/projects"],
-              ["Contacto", "/contact"],
-            ].map(([label, href]) => (
-              <li key={label}>
-                <Link
-                  href={href}
+            {footerLinks.map(({ label, id }) => (
+              <li key={id}>
+                <button
+                  type="button"
+                  onClick={() => handleScroll(id)}
                   className="relative hover:text-cyan-400 transition group"
                 >
                   <span className="absolute -left-4 opacity-0 group-hover:opacity-100 text-cyan-400 transition">
-                    ▶
+                    &gt;
                   </span>
                   {label}
-                </Link>
+                </button>
               </li>
             ))}
           </ul>
         </motion.div>
 
-        {/* SOCIAL / GUILD */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -84,20 +93,33 @@ export default function Footer() {
           </h3>
 
           <div className="flex gap-4">
-            <a className="p-3 rounded-xl bg-white/5 hover:bg-cyan-400/10 border border-white/10 hover:border-cyan-400/40 transition group">
+            <a
+              href="https://github.com/jkLion12"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-xl bg-white/5 hover:bg-cyan-400/10 border border-white/10 hover:border-cyan-400/40 transition group"
+            >
               <Github className="text-white/70 group-hover:text-cyan-400" />
             </a>
 
-            <a className="p-3 rounded-xl bg-white/5 hover:bg-cyan-400/10 border border-white/10 hover:border-cyan-400/40 transition group">
+            <a
+              href="https://www.linkedin.com/in/jack-lion-ha/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-xl bg-white/5 hover:bg-cyan-400/10 border border-white/10 hover:border-cyan-400/40 transition group"
+            >
               <Linkedin className="text-white/70 group-hover:text-cyan-400" />
             </a>
 
-            <a className="p-3 rounded-xl bg-white/5 hover:bg-cyan-400/10 border border-white/10 hover:border-cyan-400/40 transition group">
+            <button
+              type="button"
+              onClick={() => handleScroll("projects")}
+              className="p-3 rounded-xl bg-white/5 hover:bg-cyan-400/10 border border-white/10 hover:border-cyan-400/40 transition group"
+            >
               <Rocket className="text-white/70 group-hover:text-cyan-400" />
-            </a>
+            </button>
           </div>
 
-          {/* MINI STATS */}
           <div className="mt-6 grid grid-cols-3 gap-3 text-xs text-white/60">
             <div className="flex items-center gap-1">
               <Cpu size={14} className="text-cyan-400" /> Frontend
@@ -112,9 +134,8 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      {/* COPYRIGHT */}
       <div className="relative border-t border-cyan-400/10 py-4 text-center text-xs text-white/40">
-        © {new Date().getFullYear()} Jack Huamani — Powered by caffeine ☕ y código 💻
+        (c) {new Date().getFullYear()} Jack Huamani - Powered by caffeine y codigo
       </div>
     </footer>
   )
