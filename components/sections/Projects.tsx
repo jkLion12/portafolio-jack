@@ -312,6 +312,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 }
 
 export default function Projects() {
+  const [showDevModal, setShowDevModal] = useState(false);
+
   return (
     <section className="py-40 relative overflow-hidden">
       {/* Fondo animado */}
@@ -366,18 +368,93 @@ export default function Projects() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <motion.a
-            href="https://github.com/jkLion12"
-            target="_blank"
-            rel="noopener noreferrer"
+          <motion.button
+            type="button"
+            onClick={() => setShowDevModal(true)}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-3 px-10 py-5 bg-gradient-to-r from-cyan-500 via-blue-500 to-purple-500 rounded-2xl text-black font-black text-lg shadow-2xl shadow-cyan-500/50 hover:shadow-cyan-500/80 transition-all"
           >
             <FaCode size={24} />
             VER TODOS LOS PROYECTOS
-          </motion.a>
+          </motion.button>
         </motion.div>
+
+        {showDevModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center px-6">
+            <motion.button
+              type="button"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              onClick={() => setShowDevModal(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 30 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              className="relative w-full max-w-xl overflow-hidden rounded-3xl border-2 border-cyan-400/60 bg-black/95 p-8 shadow-[0_0_50px_rgba(34,211,238,0.35)]"
+            >
+              <div className="absolute inset-0 bg-[linear-gradient(rgba(0,255,255,0.06)_1px,transparent_1px),linear-gradient(90deg,rgba(0,255,255,0.06)_1px,transparent_1px)] bg-[size:24px_24px] opacity-40" />
+              <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500" />
+              <div className="absolute top-4 left-4 h-4 w-4 border-l-2 border-t-2 border-cyan-400" />
+              <div className="absolute top-4 right-4 h-4 w-4 border-r-2 border-t-2 border-cyan-400" />
+              <div className="absolute bottom-4 left-4 h-4 w-4 border-b-2 border-l-2 border-cyan-400" />
+              <div className="absolute bottom-4 right-4 h-4 w-4 border-b-2 border-r-2 border-cyan-400" />
+
+              <div className="relative z-10">
+                <div className="mb-6 flex items-center justify-between gap-4">
+                  <div>
+                    <p className="mb-2 font-mono text-xs tracking-[0.3em] text-cyan-400">
+                      &lt; SIDE_QUEST_LOCKED /&gt;
+                    </p>
+                    <h3 className="text-3xl font-black text-white">
+                      MISION EN DESARROLLO
+                    </h3>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setShowDevModal(false)}
+                    className="rounded-xl border border-cyan-400/40 px-4 py-2 font-mono text-sm text-cyan-300 transition hover:bg-cyan-400/10 hover:text-cyan-100"
+                  >
+                    CERRAR
+                  </button>
+                </div>
+
+                <div className="mb-6 rounded-2xl border border-cyan-400/20 bg-cyan-400/5 p-5">
+                  <p className="font-mono text-sm leading-relaxed text-white/80">
+                    El portal completo de proyectos todavia se esta desbloqueando.
+                    Estoy cargando nuevas misiones, mejoras visuales y contenido extra
+                    para la siguiente actualizacion.
+                  </p>
+                </div>
+
+                <div className="mb-8 flex flex-wrap gap-3">
+                  {["NEW MISSIONS", "BETA MODE", "COMING SOON"].map((tag) => (
+                    <span
+                      key={tag}
+                      className="rounded-full border border-cyan-400/30 bg-black/60 px-4 py-2 font-mono text-xs text-cyan-300"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+
+                <motion.button
+                  type="button"
+                  onClick={() => setShowDevModal(false)}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-3 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-500 px-6 py-3 font-black text-black shadow-lg shadow-cyan-500/30"
+                >
+                  <FaCode size={18} />
+                  ENTENDIDO, VOLVER AL LOBBY
+                </motion.button>
+              </div>
+            </motion.div>
+          </div>
+        )}
       </div>
     </section>
   );
