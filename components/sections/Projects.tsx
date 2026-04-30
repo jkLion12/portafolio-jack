@@ -6,13 +6,15 @@ import { useState, useRef, MouseEvent } from "react";
 import { FaGithub, FaExternalLinkAlt, FaCode } from "react-icons/fa";
 import { useEffect } from "react";
 
+const siteBasePath = process.env.NODE_ENV === "production" ? "/portafolio-jack" : "";
+
 const projects = [
   {
     title: "Sistema Web Quipu Digital",
     desc: "Aplicación web moderna con Angular, Nest.js, Node.js  y autenticación por token.",
     image: "./img/projects/quipu.png",
     tech: ["Angular", "Nest.js", "Node.js", "JWT"],
-    demo: "/demos/QUIPU%20DIGITAL.pdf",
+    demo: `${siteBasePath}/demos/QUIPU%20DIGITAL.pdf`,
     code: "#",
     featured: true,
   },
@@ -21,7 +23,7 @@ const projects = [
     desc: "Prototipo de Aplicación para mejorar hábitos desarrollada con React Native, TypeScript  y enfoque UX/UI.",
     image: "./img/projects/Ascendia.jpg",
     tech: ["React Native", "TypeScript", "Firebase"],
-    demo: "/demos/prototipo%20de%20app%20de%20habitos.pdf",
+    demo: `${siteBasePath}/demos/prototipo%20de%20app%20de%20habitos.pdf`,
     code: "#",
     featured: false,
   },
@@ -30,7 +32,7 @@ const projects = [
     desc: "Prototipo de Aplicación para gestionar finanzas personales desarrollada con React Native, TypeScript  y enfoque y enfoque UX/UI.",
     image: "./img/projects/FinMentor IA.jpg",
     tech: ["React Native", "TypeScript", "Firebase"],
-    demo: "/demos/Prototipo%20de%20app%20de%20ahorro%20inteligente.pdf",
+    demo: `${siteBasePath}/demos/Prototipo%20de%20app%20de%20ahorro%20inteligente.pdf`,
     code: "#",
     featured: false,
   },
@@ -39,7 +41,7 @@ const projects = [
     desc: "Sistema Web para administracion diaria de guarderia infantil desarrollado con Angular, Node.js Nest.js",
     image: "./img/projects/BLABLA CLUB.png",
     tech: ["Angular", "Node.js", "Nest.js"],
-    demo: "/demos/BLABLA%20CLUB.pdf",
+    demo: `${siteBasePath}/demos/BLABLA%20CLUB.pdf`,
     code: "#",
     featured: false,
   },
@@ -48,7 +50,7 @@ const projects = [
     desc: "App movil para el control, calculo y monitoreo de la desinfeccion del agua potable desarrollada con Ionic",
     image: "./img/projects/Clorota movil.jpg",
     tech: ["IONIC", "Angular"],
-    demo: "/demos/APP%20CLOROTA%20MOVIL.pdf",
+    demo: `${siteBasePath}/demos/APP%20CLOROTA%20MOVIL.pdf`,
     code: "#",
     featured: false,
   },
