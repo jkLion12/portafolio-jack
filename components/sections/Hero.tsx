@@ -6,6 +6,9 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import ParticlesBackground from "../ui/ParticlesBackground";
 
+const siteBasePath = process.env.NODE_ENV === "production" ? "/portafolio-jack" : "";
+const cvUrl = `${siteBasePath}/cv/CV%20JACK%20HUAMANI.pdf`;
+
 export default function Hero() {
   const [text, setText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
@@ -95,7 +98,9 @@ export default function Hero() {
                 boxShadow: "0 0 25px rgba(34, 211, 238, 0.5)",
               }}
               whileTap={{ scale: 0.95 }}
-              href="#projects"
+              href={cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="group relative px-6 py-3 bg-cyan-500 text-black font-semibold rounded-xl overflow-hidden transition-all"
             >
               <span className="relative z-10">Descargar CV</span>

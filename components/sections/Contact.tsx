@@ -2,8 +2,45 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { FormEvent, useState } from "react";
+
+const formspreeEndpoint = "https://formspree.io/f/mvzlplkw";
 
 export default function Contact() {
+  const [status, setStatus] = useState("");
+  const [isSending, setIsSending] = useState(false);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+
+    setIsSending(true);
+    setStatus("Enviando mensaje...");
+
+    try {
+      const response = await fetch(formspreeEndpoint, {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo enviar el mensaje.");
+      }
+
+      form.reset();
+      setStatus("Mensaje enviado correctamente. Te respondere pronto.");
+    } catch {
+      setStatus("No se pudo enviar. Intentalo otra vez en unos segundos.");
+    } finally {
+      setIsSending(false);
+    }
+  };
+
   return (
     <section className="py-32 px-6 flex justify-center relative overflow-hidden">
       {/* Glow fondo */}
@@ -49,7 +86,7 @@ export default function Contact() {
           </div>
 
           {/* Form */}
-          <form className="space-y-6 relative z-10">
+          <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
             {/* Input */}
             {[
               { label: "PLAYER_NAME", type: "text", placeholder: "Tu nombre" },
@@ -60,6 +97,7 @@ export default function Contact() {
                   {field.label}
                 </label>
                 <input
+                  name={field.label === "PLAYER_NAME" ? "name" : "email"}
                   type={field.type}
                   required
                   placeholder={field.placeholder}
@@ -74,6 +112,7 @@ export default function Contact() {
                 MESSAGE_DATA
               </label>
               <textarea
+                name="message"
                 rows={4}
                 required
                 placeholder="Describe tu misión..."
@@ -86,7 +125,8 @@ export default function Contact() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               type="submit"
-              className="relative w-full py-4 mt-4 font-mono font-bold tracking-widest text-cyan-400 border-2 border-cyan-400 rounded-xl overflow-hidden group"
+              disabled={isSending}
+              className="relative w-full py-4 mt-4 font-mono font-bold tracking-widest text-cyan-400 border-2 border-cyan-400 rounded-xl overflow-hidden group disabled:cursor-not-allowed disabled:opacity-60"
             >
               <span className="relative z-10">
                 ▶ TRANSMIT MESSAGE
@@ -95,6 +135,12 @@ export default function Contact() {
               {/* Glow animado */}
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-cyan-400/30 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
             </motion.button>
+
+            {status && (
+              <p className="text-center text-xs font-mono text-cyan-300">
+                {status}
+              </p>
+            )}
           </form>
         </div>
 
