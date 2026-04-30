@@ -8,47 +8,47 @@ import { useEffect } from "react";
 
 const projects = [
   {
-    title: "Sistema Web Quipu",
-    desc: "Aplicación web moderna con React, Next.js y autenticación por token.",
+    title: "Sistema Web Quipu Digital",
+    desc: "Aplicación web moderna con Angular, Nest.js, Node.js  y autenticación por token.",
     image: "./img/projects/quipu.png",
-    tech: ["Next.js", "React", "Tailwind", "JWT"],
-    demo: "#",
+    tech: ["Angular", "Nest.js", "Node.js", "JWT"],
+    demo: "/demos/QUIPU%20DIGITAL.pdf",
     code: "#",
     featured: true,
   },
   {
-    title: "App Móvil Fitness",
-    desc: "Aplicación híbrida desarrollada con Ionic y enfoque UX/UI.",
-    image: "./img/projects/quipu.png",
-    tech: ["IONIC", "Angular", "Firebase"],
-    demo: "#",
+    title: "App Móvil Ascendia",
+    desc: "Prototipo de Aplicación para mejorar hábitos desarrollada con React Native, TypeScript  y enfoque UX/UI.",
+    image: "./img/projects/Ascendia.jpg",
+    tech: ["React Native", "TypeScript", "Firebase"],
+    demo: "/demos/prototipo%20de%20app%20de%20habitos.pdf",
     code: "#",
     featured: false,
   },
   {
-    title: "Videojuego Educativo",
-    desc: "Videojuego educativo con gamificación y aprendizaje interactivo.",
-    image: "./img/projects/quipu.png",
-    tech: ["Unity", "C#", "Blender"],
-    demo: "#",
+    title: "App Movil FinMentor IA",
+    desc: "Prototipo de Aplicación para gestionar finanzas personales desarrollada con React Native, TypeScript  y enfoque y enfoque UX/UI.",
+    image: "./img/projects/FinMentor IA.jpg",
+    tech: ["React Native", "TypeScript", "Firebase"],
+    demo: "/demos/Prototipo%20de%20app%20de%20ahorro%20inteligente.pdf",
     code: "#",
     featured: false,
   },
   {
-    title: "Dashboard Analytics",
-    desc: "Panel de control en tiempo real con Next.js y Chart.js",
-    image: "./img/projects/quipu.png",
-    tech: ["Next.js", "Node.js", "PostgreSQL"],
-    demo: "#",
+    title: "Sistema Web BlaBla Club",
+    desc: "Sistema Web para administracion diaria de guarderia infantil desarrollado con Angular, Node.js Nest.js",
+    image: "./img/projects/BLABLA CLUB.png",
+    tech: ["Angular", "Node.js", "Nest.js"],
+    demo: "/demos/BLABLA%20CLUB.pdf",
     code: "#",
     featured: false,
   },
   {
-    title: "Kinder Cloud",
-    desc: "Panel de control en tiempo real con Next.js y Chart.js",
-    image: "./img/projects/quipu.png",
-    tech: ["Next.js", "Node.js", "PostgreSQL"],
-    demo: "#",
+    title: "App Clorota Movil",
+    desc: "App movil para el control, calculo y monitoreo de la desinfeccion del agua potable desarrollada con Ionic",
+    image: "./img/projects/Clorota movil.jpg",
+    tech: ["IONIC", "Angular"],
+    demo: "/demos/APP%20CLOROTA%20MOVIL.pdf",
     code: "#",
     featured: false,
   },
@@ -272,6 +272,8 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
           <div className="flex gap-4 transform translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
             <motion.a
               href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
               whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(0,255,255,0.5)" }}
               whileTap={{ scale: 0.95 }}
               className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl text-black font-bold text-sm shadow-lg shadow-cyan-500/30 transition-all"
